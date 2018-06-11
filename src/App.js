@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     friends,
     score: 0,
-    highscore
+    highscore: 0
   };
 
   // function for creating an array of friends from the JSON
