@@ -13,38 +13,58 @@ class App extends Component {
     highscore: 0
   };
 
+  currentScore = 0;
+  currentHighScore = 0;
+
   // function for creating an array of friends from the JSON
   friendsList = this.state.friends.map(function (friends) {
     return friends.id;
   })
 
-  // used to be called removeFriends
   shuffleFriends = () => {
     // Filter this.state.friends for friends with an id not equal to the id being removed
     let newFriendsArr = this.state.friends
-    .map(friend => [Math.random(), friend])
-    .sort((friendOne, friendTwo) => friendOne[0] - friendTwo[0])
-    .map(friend => friend[1]);
-    console.log(newFriendsArr);
-    this.setState({friends: newFriendsArr});
+      .map(friend => [Math.random(), friend])
+      .sort((friendOne, friendTwo) => friendOne[0] - friendTwo[0])
+      .map(friend => friend[1]);
+    this.setState({ friends: newFriendsArr });
   };
 
-
+  // checks high score and updates the state
+  checkScores = () => {
+    if (this.state.score >= this.state.highscore) {
+      this.setState({ highscore:  this.currentScore});
+    }
+    if(this.currentScore === 12) {
+      // trigger a modal when dismissed will reset the high score
+      this.currentScore = 0;
+      this.setState({score: this.currentScore});
+      console.log('you win');
+    }
+  }
 
   checkClicked = (id, clicked) => {
-
-    if (clicked) {
-      
-    }
     let newFriends = this.state.friends;
 
-    newFriends.forEach((friend, index) => {
-      if (friend.id === id) {
-        newFriends[index].clicked = true;
-      }
-    })
-    this.setState({score: this.state.score++}); // increments score
-    this.setState({ friends: newFriends });
+    if (clicked) {
+      alert("this has been clicked");
+      this.currentScore = 0;
+      newFriends.forEach((friend, index) => {
+        newFriends[index].clicked = false;
+        this.setState({ score: this.currentScore });
+      })
+    }
+
+    if (!clicked) {
+      this.currentScore++;
+      newFriends.forEach((friend, index) => {
+        if (friend.id === id) {
+          newFriends[index].clicked = true;
+          this.setState({ score: this.currentScore });
+        }
+      })
+      this.checkScores();
+    }
     this.shuffleFriends();
   }
 
@@ -52,6 +72,8 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
+        <h2>Score: {this.state.score}</h2>
+        <h2>High Score: {this.state.highscore}</h2>
         <Title>Friends List</Title>
         {this.state.friends.map(friend => (
           <FriendCard
@@ -61,14 +83,10 @@ class App extends Component {
             name={friend.name}
             image={friend.image}
             clicked={friend.clicked}
-          // occupation={friend.occupation}
-          // location={friend.location}
           />
         ))}
       </Wrapper>
     );
   }
-
 }
-
 export default App;
