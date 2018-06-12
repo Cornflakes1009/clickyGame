@@ -33,7 +33,13 @@ class App extends Component {
   // checks high score and updates the state
   checkScores = () => {
     if (this.state.score >= this.state.highscore) {
-      this.setState({ highscore:  this.currentScore}); //this.currentScore
+      this.setState({ highscore:  this.currentScore});
+    }
+    if(this.currentScore === 12) {
+      // trigger a modal when dismissed will reset the high score
+      this.currentScore = 0;
+      this.setState({score: this.currentScore});
+      console.log('you win');
     }
   }
 
