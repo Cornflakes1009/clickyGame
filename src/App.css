@@ -1,5 +1,43 @@
+body {
+  color: white;
+}
 .title {
   width: 100%;
   text-align: center;
   margin-bottom: 50px;
+  margin-top: 25px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.card {
+  background-color: rgb(201, 30, 30);
+  box-shadow: 3px 3px 3px rgb(44, 44, 44);
+
+}
+.jumbotron {
+  width: 100%;
+  background-color: rgb(22, 26, 58);
+  /* box-shadow: 6px 6px 6px rgb(70, 97, 155); */
+  box-shadow: 3px 3px 3px rgb(44, 44, 44);
+}
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+  transform: scale(1.1);
 }

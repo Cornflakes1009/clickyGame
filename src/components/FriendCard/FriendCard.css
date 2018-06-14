@@ -7,7 +7,7 @@
   position: relative;
   /* width: 325px; */
   width: 250px;
-  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+  box-shadow: 0 3px 6px rgb(119, 58, 58), 0 3px 6px rgb(179, 67, 67);
   text-align: left;
 }
 
@@ -18,7 +18,7 @@
   background:#6CADDC;
 }
 .card > .img-container > img {
-  width: 60%
+  width: 121%;
 }
 
 .card > .content {
@@ -47,3 +47,4 @@
 .card > .remove:hover {
   color: #d50000;
 }
+

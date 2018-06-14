@@ -33,12 +33,12 @@ class App extends Component {
   // checks high score and updates the state
   checkScores = () => {
     if (this.state.score >= this.state.highscore) {
-      this.setState({ highscore:  this.currentScore});
+      this.setState({ highscore: this.currentScore });
     }
-    if(this.currentScore === 12) {
+    if (this.currentScore === 12) {
       // trigger a modal when dismissed will reset the high score
       this.currentScore = 0;
-      this.setState({score: this.currentScore});
+      this.setState({ score: this.currentScore });
       console.log('you win');
     }
   }
@@ -72,12 +72,19 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <h2>Score: {this.state.score}</h2>
-        <h2>High Score: {this.state.highscore}</h2>
-        <Title>Friends List</Title>
+        <div className="jumbotron">
+          <div className="container">
+            <div className="flex-container">
+              <span className="score">Score: {this.state.score}</span>
+              <span className="highscore">High Score: {this.state.highscore}</span>
+            </div>
+            <Title>CW Heroes</Title>
+          </div>
+        </div>
         {this.state.friends.map(friend => (
           <FriendCard
             checkClicked={this.checkClicked}
+            // onMouseEnter={}
             id={friend.id}
             key={friend.id}
             name={friend.name}
@@ -90,3 +97,5 @@ class App extends Component {
   }
 }
 export default App;
+
+
