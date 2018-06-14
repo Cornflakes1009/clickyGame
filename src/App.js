@@ -4,14 +4,29 @@ import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import friends from "./friends.json";
 import "./App.css";
+import Modal from 'react-responsive-modal';
+
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
     score: 0,
-    highscore: 0
+    highscore: 0,
+    open: false
   };
+
+  winnerOrLoser = '';
+  // modal functions
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+  // end of modal line
+
 
   currentScore = 0;
   currentHighScore = 0;
@@ -37,9 +52,10 @@ class App extends Component {
     }
     if (this.currentScore === 12) {
       // trigger a modal when dismissed will reset the high score
+      this.winnerOrLoser = "WINNER!!!";
       this.currentScore = 0;
       this.setState({ score: this.currentScore });
-      console.log('you win');
+      this.onOpenModal();
     }
   }
 
@@ -47,7 +63,8 @@ class App extends Component {
     let newFriends = this.state.friends;
 
     if (clicked) {
-      alert("this has been clicked");
+      this.winnerOrLoser = "Try again.";
+      this.onOpenModal();
       this.currentScore = 0;
       newFriends.forEach((friend, index) => {
         newFriends[index].clicked = false;
@@ -92,6 +109,18 @@ class App extends Component {
             clicked={friend.clicked}
           />
         ))}
+        {/* code below this line is for modal */}
+        {/* const {this.state.open} = this.state; */}
+        
+          {/* <button onClick={this.onOpenModal}>Open modal</button> */}
+
+          <Modal open={this.state.open} onClose={this.onCloseModal} center>
+          <div className="modal-style">
+            <h2 className="">{this.winnerOrLoser}</h2>
+          </div>
+          </Modal>
+
+
       </Wrapper>
     );
   }

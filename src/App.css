@@ -41,3 +41,9 @@ body {
 .hvr-grow:active {
   transform: scale(1.1);
 }
+
+.modal-style {
+  color: red !important;
+  width: 300px;
+  text-align: center;
+}
